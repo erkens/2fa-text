@@ -1,0 +1,23 @@
+{
+    "name": "erkens/2fa-text",
+    "type": "library",
+    "description": "Extends scheb/2fa-bundle with two-factor authentication via simple text messages",
+    "keywords": ["2fa", "two-factor", "two-step", "authentication", "symfony", "sms", "text"],
+    "homepage": "https://github.com/Erkens/2fa-text",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Erkens",
+            "email": "erkens@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5",
+        "scheb/2fa-bundle": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Erkens\\Security\\TwoFactorTextBundle\\": ""
+        }
+    }
+}
