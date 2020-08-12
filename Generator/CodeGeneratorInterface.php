@@ -12,4 +12,9 @@ interface CodeGeneratorInterface
      * Generate a new authentication code an send it to the user.
      */
     public function generateAndSend(TwoFactorTextInterface $user): void;
+
+    /**
+     * Resend the authentication code to the user
+     */
+    public function reSend(TwoFactorTextInterface $user): void;
 }

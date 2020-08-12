@@ -38,14 +38,14 @@ class TextTwoFactorProvider implements TwoFactorProviderInterface
 
     public function prepareAuthentication($user): void
     {
-        if ($user instanceof \Erkens\Security\TwoFactorTextBundle\Model\TwoFactorTextInterface) {
+        if ($user instanceof TwoFactorTextInterface) {
             $this->codeGenerator->generateAndSend($user);
         }
     }
 
     public function validateAuthenticationCode($user, string $authenticationCode): bool
     {
-        if (!($user instanceof \Erkens\Security\TwoFactorTextBundle\Model\TwoFactorTextInterface)) {
+        if (!($user instanceof TwoFactorTextInterface)) {
             return false;
         }
 
@@ -58,5 +58,12 @@ class TextTwoFactorProvider implements TwoFactorProviderInterface
     public function getFormRenderer(): TwoFactorFormRendererInterface
     {
         return $this->formRenderer;
+    }
+
+    public function resendAuthenticationCode($user): void
+    {
+        if ($user instanceof TwoFactorTextInterface) {
+            $this->codeGenerator->reSend($user);
+        }
     }
 }
