@@ -10,24 +10,10 @@ use Scheb\TwoFactorBundle\Model\PersisterInterface;
 
 class CodeGenerator implements CodeGeneratorInterface
 {
-    /**
-     * @var PersisterInterface
-     */
-    private $persister;
-
-    /**
-     * @var AuthCodeTextInterface
-     */
-    private $textSender;
-
-    /**
-     * @var int
-     */
-    private $digits;
-    /**
-     * @var string
-     */
-    private $text;
+    private PersisterInterface $persister;
+    private AuthCodeTextInterface $textSender;
+    private int $digits;
+    private string $text;
 
     public function __construct(
         PersisterInterface $persister,
@@ -48,12 +34,18 @@ class CodeGenerator implements CodeGeneratorInterface
         $code = $this->generateCode($min, $max);
         $user->setTextAuthCode((string)$code);
         $this->persister->persist($user);
-        $this->textSender->sendAuthCode($user, $this->text);
+        $this->send($user);
     }
 
     public function reSend(TwoFactorTextInterface $user): void
     {
-        $this->textSender->sendAuthCode($user, $this->text);
+        $this->send($user);
+    }
+
+    protected function send(TwoFactorTextInterface $user): void
+    {
+        $this->textSender->setMessageFormat($this->text);
+        $this->textSender->sendAuthCode($user, $user->getTextAuthCode());
     }
 
     protected function generateCode(int $min, int $max): int

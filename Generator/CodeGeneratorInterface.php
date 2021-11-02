@@ -9,7 +9,7 @@ use Erkens\Security\TwoFactorTextBundle\Model\TwoFactorTextInterface;
 interface CodeGeneratorInterface
 {
     /**
-     * Generate a new authentication code an send it to the user.
+     * Generate a new authentication code and send it to the user.
      */
     public function generateAndSend(TwoFactorTextInterface $user): void;
 

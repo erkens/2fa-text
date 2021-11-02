@@ -12,15 +12,8 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\TwoFactorProviderInterface
 
 class TextTwoFactorProvider implements TwoFactorProviderInterface
 {
-    /**
-     * @var CodeGeneratorInterface
-     */
-    private $codeGenerator;
-
-    /**
-     * @var TwoFactorFormRendererInterface
-     */
-    private $formRenderer;
+    private CodeGeneratorInterface $codeGenerator;
+    private TwoFactorFormRendererInterface $formRenderer;
 
     public function __construct(CodeGeneratorInterface $codeGenerator, TwoFactorFormRendererInterface $formRenderer)
     {

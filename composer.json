@@ -12,8 +12,11 @@
         }
     ],
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "scheb/2fa-bundle": "^5.0"
+    },
+    "require-dev": {
+        "symfony/http-client": "^5.3"
     },
     "autoload": {
         "psr-4": {
