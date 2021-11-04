@@ -9,9 +9,11 @@ use Erkens\Security\TwoFactorTextBundle\Model\TwoFactorTextInterface;
 interface AuthCodeTextInterface
 {
     /**
-     * Gets the message that will be sent to the user (%s will be replaced by the code)
+     * Sets the message that will be sent to the user (%s will be replaced by the code)
      */
+    public function setMessageFormat(string $format): void;
     public function getMessageFormat(): string;
+
 
     /**
      * Send the auth code to the user via text

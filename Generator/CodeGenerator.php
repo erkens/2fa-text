@@ -29,12 +29,18 @@ class CodeGenerator implements CodeGeneratorInterface
 
     public function generateAndSend(TwoFactorTextInterface $user): void
     {
-        $min = 10 ** ($this->digits - 1);
-        $max = 10 ** $this->digits - 1;
-        $code = $this->generateCode($min, $max);
-        $user->setTextAuthCode((string)$code);
+        $code = $this->generateCode();
+        $user->setTextAuthCode($code);
         $this->persister->persist($user);
         $this->send($user);
+    }
+
+    public function returnAndSendWithMessage(TwoFactorTextInterface $user, string $text): string
+    {
+        $code = $this->generateCode();
+        $this->textSender->setMessageFormat($text);
+        $this->textSender->sendAuthCode($user, $code);
+        return $text;
     }
 
     public function reSend(TwoFactorTextInterface $user): void
@@ -48,8 +54,10 @@ class CodeGenerator implements CodeGeneratorInterface
         $this->textSender->sendAuthCode($user, $user->getTextAuthCode());
     }
 
-    protected function generateCode(int $min, int $max): int
+    protected function generateCode(): string
     {
-        return random_int($min, $max);
+        $min = 10 ** ($this->digits - 1);
+        $max = 10 ** $this->digits - 1;
+        return (string) random_int($min, $max);
     }
 }
