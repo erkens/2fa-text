@@ -40,7 +40,7 @@ class CodeGenerator implements CodeGeneratorInterface
         $code = $this->generateCode();
         $this->textSender->setMessageFormat($text);
         $this->textSender->sendAuthCode($user, $code);
-        return $text;
+        return $code;
     }
 
     public function reSend(TwoFactorTextInterface $user): void
