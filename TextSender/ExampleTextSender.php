@@ -9,7 +9,9 @@ use Symfony\Component\HttpClient\HttpClient;
 
 class ExampleTextSender implements AuthCodeTextInterface
 {
-    public function sendAuthCode(TwoFactorTextInterface $user, string $format): void
+    private string $format;
+
+    public function sendAuthCode(TwoFactorTextInterface $user, ?string $code = null): void
     {
         // this is just an example, as you can see, this would always generate an error because the host "text-message-api" is invalid
         HttpClient::create()->request(
@@ -18,9 +20,19 @@ class ExampleTextSender implements AuthCodeTextInterface
             [
                 'body' => [
                     'recipient' => $user->getTextAuthRecipient(),
-                    'text' => sprintf($format, $user->getTextAuthCode()),
+                    'text' => sprintf($this->getMessageFormat(), $code ?? $user->getTextAuthCode()),
                 ]
             ]
         );
+    }
+
+    public function setMessageFormat(string $format): void
+    {
+        $this->format = $format;
+    }
+
+    public function getMessageFormat(): string
+    {
+        return $this->format;
     }
 }
