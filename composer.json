@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
-        "scheb/2fa-bundle": "^5.0 || ^6.0"
+        "php": "^8.0",
+        "scheb/2fa-bundle": "^6.0"
     },
     "require-dev": {
         "symfony/http-client": "^5.3 || ^6.0"

@@ -14,7 +14,6 @@ interface AuthCodeTextInterface
     public function setMessageFormat(string $format): void;
     public function getMessageFormat(): string;
 
-
     /**
      * Send the auth code to the user via text
      *

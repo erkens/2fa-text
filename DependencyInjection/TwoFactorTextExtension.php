@@ -23,7 +23,7 @@ class TwoFactorTextExtension extends Extension implements PrependExtensionInterf
         }
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'two_factor_text';
     }
@@ -41,7 +41,7 @@ class TwoFactorTextExtension extends Extension implements PrependExtensionInterf
         $container->setAlias($this->getAlias() . '.security.auth_code_sender', $config['auth_code_sender']);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $configs = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration(new Configuration(), $configs);
