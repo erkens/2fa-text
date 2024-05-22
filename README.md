@@ -24,6 +24,9 @@ two_factor_text:
     text: 'To login, use this code: %s'
     template: '@SchebTwoFactor/Authentication/form.html.twig'
 ```
+You can add this in its own yaml file inside `config/packages` or place it within the existing `scheb_2fa.yaml`. But
+make sure you have the `two_factor_text` at the root of the yaml-tree (not under `scheb_two_factor`). 
+
 
 License
 -------
