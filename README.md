@@ -13,7 +13,7 @@ After you have installed and configured [scheb/2fa-bundle](https://github.com/sc
 composer require erkens/2fa-text
 ```
 
-First thing to do is make a new service that implements `Erkens\Security\TwoFactorTextBundle\Generator\CodeGeneratorInterface`
+First thing to do is make a new service that implements `Erkens\Security\TwoFactorTextBundle\TextSender\AuthCodeTextInterface`
 so we can actually send a sms or text message. This service can then be used in the configuration as "auth_code_sender":
 
 ```
