@@ -27,6 +27,10 @@ two_factor_text:
 You can add this in its own yaml file inside `config/packages` or place it within the existing `scheb_2fa.yaml`. But
 make sure you have the `two_factor_text` at the root of the yaml-tree (not under `scheb_two_factor`). 
 
+**Next**
+
+Your `User` entity must implement the `Erkens\Security\TwoFactorTextBundle\Model\TwoFactorTextInterface` and implement the required methods.
+
 
 License
 -------
