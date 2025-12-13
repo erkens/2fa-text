@@ -1,0 +1,44 @@
+services:
+	# Service for the default code generator
+	two_factor_text.security.default_code_generator:
+		class: Erkens\Security\TwoFactorTextBundle\Generator\CodeGenerator
+		lazy: true
+		arguments:
+			# Argument 1: Service ID for persistence
+			- '@scheb_two_factor.persister'
+			# Argument 2: Service ID for sending the auth code
+			- '@two_factor_text.security.auth_code_sender'
+			# Argument 3: Parameter for the number of digits
+			- '%two_factor_text.digits%'
+			# Argument 4: Parameter for the text message format
+			- '%two_factor_text.text%'
+
+	# Alias for the Code Generator Interface (using the default implementation)
+	Erkens\Security\TwoFactorTextBundle\Generator\CodeGeneratorInterface:
+		alias: two_factor_text.security.code_generator
+		public: true
+
+	# Example text sender implementation (no arguments needed)
+	Erkens\Security\TwoFactorTextBundle\TextSender\ExampleTextSender: ~
+
+	# Service for the form renderer, which uses the SchebTwoFactorBundle's default renderer
+	two_factor_text.security.form_renderer:
+		class: Scheb\TwoFactorBundle\Security\TwoFactor\Provider\DefaultTwoFactorFormRenderer
+		lazy: true
+		arguments:
+			# Argument 1: Service ID for the Twig templating engine
+			- '@twig'
+			# Argument 2: Parameter for the template path
+			- '%two_factor_text.template%'
+
+	# The main two-factor provider service
+	two_factor_text.security.provider:
+		class: Erkens\Security\TwoFactorTextBundle\Provider\TextTwoFactorProvider
+		arguments:
+			# Argument 1: The code generator service
+			- '@two_factor_text.security.code_generator'
+			# Argument 2: The form renderer service
+			- '@two_factor_text.security.form_renderer'
+		tags:
+			# Tagging the service as a two-factor provider with the alias 'text'
+			- { name: scheb_two_factor.provider, alias: text }

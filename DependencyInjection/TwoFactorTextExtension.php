@@ -30,8 +30,8 @@ class TwoFactorTextExtension extends Extension implements PrependExtensionInterf
 
     private function configureTextAuthenticationProvider(ContainerBuilder $container, array $config): void
     {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('two_factor_provider_text.xml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('two_factor_provider_text.yaml');
 
         $container->setParameter($this->getAlias() . '.enabled', $config['enabled']);
         $container->setParameter($this->getAlias() . '.template', $config['template']);
