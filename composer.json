@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "scheb/2fa-bundle": "^7.3"
+        "scheb/2fa-bundle": "^7.3||^8.0"
     },
     "require-dev": {
         "symfony/http-client": "^7.0"
