@@ -60,7 +60,7 @@ class TextTwoFactorProvider implements TwoFactorProviderInterface
         }
     }
 
-    public function needsPreparation(object $user): bool
+    public function needsPreparation(): bool
     {
         // For SMS/Text, we usually always need preparation
         // because we have to send the text message.
