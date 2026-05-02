@@ -59,4 +59,11 @@ class TextTwoFactorProvider implements TwoFactorProviderInterface
             $this->codeGenerator->reSend($user);
         }
     }
+
+    public function needsPreparation(): bool
+    {
+        // For SMS/Text, we usually always need preparation
+        // because we have to send the text message.
+        return true;
+    }
 }
